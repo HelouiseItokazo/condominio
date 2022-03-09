@@ -11,17 +11,12 @@ public class TestaImposto {
 	
 	public static void main(String[] args) {
 		
-		Pedido pedido = new Pedido(new BigDecimal(600), 1);
+		Pedido pedido = new Pedido(new BigDecimal(100), 1);
 		CalculadoraDeImposto calculadoraDeImposto = new CalculadoraDeImposto();
 		
-		calculadoraDeImposto.setImposto(new Iss());
+		calculadoraDeImposto.setImposto(new Icms(new Iss(null)));
 		BigDecimal imposto = calculadoraDeImposto.calcular(pedido);
 		System.out.println(imposto);
-
-		calculadoraDeImposto.setImposto(new Icms());
-		imposto = calculadoraDeImposto.calcular(pedido);
-		System.out.println(imposto);
-
 		
 	}
 
