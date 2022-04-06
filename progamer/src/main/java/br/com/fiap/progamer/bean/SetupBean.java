@@ -1,37 +1,51 @@
 package br.com.fiap.progamer.bean;
 
-import java.math.BigDecimal;
+import java.util.List;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
+import br.com.fiap.progamer.dao.SetupDao;
+import br.com.fiap.progamer.model.Setup;
+
 @Named
+@RequestScoped
 public class SetupBean {
 	
-	private String name = "Meu Setup";
-	private String description;
-	private BigDecimal price;
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public BigDecimal getPrice() {
-		return price;
-	}
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	private Setup setup = new Setup();
+	private List<Setup> list;
+			
+	public SetupBean(){
+		this.list = list();
 	}
 	
+	public void save() {
+		System.out.println(setup);
+		new SetupDao().create(setup);
+	}
 	
+	public List<Setup> list() {
+		SetupDao dao = new SetupDao();
+		List<Setup> list = dao.listAll();
+		return list;
+	}
 	
 	
 
+	public List<Setup> getList() {
+		return list;
+	}
+
+	public void setList(List<Setup> list) {
+		this.list = list;
+	}
+
+	public Setup getSetup() {
+		return setup;
+	}
+
+	public void setSetup(Setup setup) {
+		this.setup = setup;
+	}
+	
 }
