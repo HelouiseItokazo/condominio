@@ -3,6 +3,9 @@ package br.com.fiap.progamer.bean;
 import java.util.List;
 
 import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.fiap.progamer.dao.SetupDao;
@@ -13,31 +16,22 @@ import br.com.fiap.progamer.model.Setup;
 public class SetupBean {
 	
 	private Setup setup = new Setup();
-	private List<Setup> list;
-			
-	public SetupBean(){
-		this.list = list();
-	}
 	
-	public void save() {
+	@Inject
+	private SetupDao dao;
+
+	public String save() {
 		System.out.println(setup);
-		new SetupDao().create(setup);
+		dao.create(setup);
+		
+		FacesMessage facesMessage = new FacesMessage("Setup cadastrado com sucesso");
+		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		
+		return "setups";
 	}
 	
 	public List<Setup> list() {
-		SetupDao dao = new SetupDao();
-		List<Setup> list = dao.listAll();
-		return list;
-	}
-	
-	
-
-	public List<Setup> getList() {
-		return list;
-	}
-
-	public void setList(List<Setup> list) {
-		this.list = list;
+		return dao.listAll();
 	}
 
 	public Setup getSetup() {

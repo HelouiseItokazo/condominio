@@ -7,24 +7,10 @@
 
 <ui:composition template="/_template.xhtml">
 	<ui:define name="content">
-
 		<h:form>
-			<div class="card" style="margin: 1em">
-				<p:dataTable var="setup" value="#{setupBean.list()}">
-					<p:column headerText="Code">
-						<h:outputText value="#{setup.id}" />
-					</p:column>
-
-					<p:column headerText="Name">
-						<h:outputText value="#{setup.name}" />
-					</p:column>
-
-					<p:column headerText="Price">
-						<h:outputText value="#{setup.price}" />
-					</p:column>
-
-				</p:dataTable>
-			</div>
+			<p:card style="width: 25em; margin: 1em auto">
+				<p>User profile</p>
+			</p:card>
 		</h:form>
 	</ui:define>
 </ui:composition>

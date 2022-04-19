@@ -5,50 +5,64 @@
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head>
-<body style="background-color: #aaa">
-
-	<div class="card">
+<ui:composition template="/_template.xhtml">
+	<ui:define name="content">
+	
 		<h:form>
-			<p:tabMenu activeIndex="#{param.i}">
-				<p:menuitem value="Home" icon="pi pi-fw pi-home">
-					<f:param name="i" value="0" />
-				</p:menuitem>
-				<p:menuitem value="Setup" icon="pi pi-fw pi-desktop">
-					<f:param name="i" value="1" />
-				</p:menuitem>
-				<p:menuitem value="Profile" icon="pi pi-fw pi-user">
-					<f:param name="i" value="2" />
-				</p:menuitem>
-			</p:tabMenu>
+			<p:card style="width: 25em; margin: 1em auto">
+				<f:facet name="title">New Setup</f:facet>
+
+				<div class="ui-fluid">
+					<div class="p-field">
+						<label for="name">Name</label>
+						<p:inputText 
+							id="name" 
+							type="text" 
+							value="#{setupBean.setup.name}" 
+							required="true"
+							requiredMessage="O campo nome é obrigatório"
+						>
+							<f:ajax event="blur" render="msg" />
+						</p:inputText>
+					</div>
+					<div class="p-field">
+						<label for="description">Description</label>
+						<p:inputTextarea 
+							id="description" 
+							type="text"
+							value="#{setupBean.setup.description}"
+							validatorMessage="A descrição deve ter pelo menos 10 caracteres"
+						>
+							<f:validateLength minimum="10" />
+							<f:ajax event="blur" render="msg" />
+						</p:inputTextarea>
+					</div>
+					<div class="p-field">
+						<label for="price">Price</label>
+						<p:inputNumber 
+							value="#{setupBean.setup.price}" 
+							id="price"
+							symbol="R$ " 
+							decimalSeparator="," 
+							thousandSeparator="." 
+							validatorMessage="O preço mínimo é 0"
+						>
+							<f:validateDoubleRange minimum="0" />
+							<f:ajax event="blur" render="msg" />
+						</p:inputNumber>
+					</div>
+				</div>
+				<f:facet name="footer">
+					<p:commandButton icon="pi pi-check" value="Save"
+						action="#{setupBean.save}" />
+					<p:commandButton icon="pi pi-times" value="Cancel"
+						action="#{setupBean.list()}" styleClass="ui-button-secondary"
+						style="margin-left: .5em" />
+				</f:facet>
+			</p:card>
 		</h:form>
-	</div>
+	</ui:define>
+</ui:composition>
 
-	<h:form>
-	<p:card style="width: 25em; margin: 1em auto">
-		<f:facet name="title">New Setup</f:facet>
 
-		<div class="ui-fluid">
-			<div class="p-field">
-				<label for="name">Name</label>
-				<p:inputText id="name" type="text" value="#{setupBean.setup.name}" /> 
-			</div>
-			<div class="p-field">
-				<label for="description">Description</label>
-				<p:inputTextarea id="description" type="text" value="#{setupBean.setup.description}" />
-			</div>
-			<div class="p-field">
-				<label for="price">Price</label>
-				<p:inputNumber value="#{setupBean.setup.price}" id="price" symbol="R$ " decimalSeparator="," thousandSeparator="." />
-			</div>
-		</div>
-		<f:facet name="footer">
-			<p:commandButton icon="pi pi-check" value="Save" action="#{setupBean.save}"/>
-			<p:commandButton icon="pi pi-times" value="Cancel" action="#{setupBean.list()}"
-				styleClass="ui-button-secondary" style="margin-left: .5em" />
-		</f:facet>
-	</p:card>
-	</h:form>
-
-</body>
 </html>
