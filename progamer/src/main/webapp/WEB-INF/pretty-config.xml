@@ -16,6 +16,15 @@
 	<url-mapping id="form-setup">
 		<pattern value="/setupnew" />
 		<view-id value="setup_new.xhtml" />
-	</url-mapping>	
-
+	</url-mapping>
+	
+	<url-mapping id="form-user">
+		<pattern value="/usernew" />
+		<view-id value="user_new.xhtml" />
+	</url-mapping>		
+	
+	<url-mapping id="users">
+		<pattern value="/users" />
+		<view-id value="users.xhtml" />
+	</url-mapping>
 </pretty-config>

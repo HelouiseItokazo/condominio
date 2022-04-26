@@ -10,24 +10,24 @@
 
 		<h:form>
 			<div class="card" style="margin: 1em">
-				<p:dataTable var="setup" value="#{setupBean.list()}">
-				
-					<p:column>
-						<img src="#{request.contextPath}#{setup.imagePath}" class="thumb"/>
-					</p:column>
+				<p:dataTable var="user" value="#{userBean.list()}">
 				
 					<p:column headerText="Code">
-						<h:outputText value="#{setup.id}" />
+						<h:outputText value="#{user.id}" />
 					</p:column>
 
 					<p:column headerText="Name">
-						<h:outputText value="#{setup.name}" />
+						<h:outputText value="#{user.name}" />
 					</p:column>
 
-					<p:column headerText="Price">
-						<h:outputText value="#{setup.price}" />
+					<p:column headerText="E-mail">
+						<h:outputText value="#{user.email}" />
 					</p:column>
 
+					<p:column headerText="Birthday">
+						<h:outputText value="#{user.birthday}">
+						</h:outputText>
+					</p:column>
 				</p:dataTable>
 			</div>
 		</h:form>
