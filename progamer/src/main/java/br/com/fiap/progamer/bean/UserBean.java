@@ -20,7 +20,6 @@ public class UserBean {
 	@Inject
 	private UserDao dao;
 	
-
 	public String save() {
 		System.out.println(user);
 		
@@ -34,6 +33,34 @@ public class UserBean {
 	
 	public List<User> list() {
 		return dao.listAll();
+	}
+	
+	public String login() {
+		if(dao.exist(user)) {
+			FacesContext
+				.getCurrentInstance()
+				.getExternalContext()
+				.getSessionMap()
+				.put("user", user);
+			
+			return "setups";
+		}
+		
+		FacesMessage facesMessage = new FacesMessage("Login inválido");
+		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		
+		return "login";
+		
+	}
+	
+	public String logout() {
+		FacesContext
+			.getCurrentInstance()
+			.getExternalContext()
+			.getSessionMap()
+			.remove("user");
+		
+		return "login";
 	}
 
 	public User getUser() {

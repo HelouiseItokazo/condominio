@@ -12,7 +12,14 @@
 </h:head> 
 
 <body>
-
+	<h:form>
+	<p:menubar>
+            <p:submenu label="#{user.email}" icon="pi pi-fw pi-user">
+                <p:menuitem action="#{userBean.logout}" value="Logout" icon="pi pi-fw pi-sign-out"/>
+            </p:submenu>
+        </p:menubar>
+	</h:form>
+	<!--  MENU -->
 	<div class="card">
 		<h:form>
 			<p:tabMenu activeIndex="#{param.i}">
