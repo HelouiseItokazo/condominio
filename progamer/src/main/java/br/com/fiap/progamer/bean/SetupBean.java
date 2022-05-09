@@ -17,6 +17,8 @@ import br.com.fiap.progamer.service.UploadService;
 @Named
 @RequestScoped
 public class SetupBean {
+
+	private Setup setup = new Setup();
 	
 	private Setup setup = new Setup();
 	
