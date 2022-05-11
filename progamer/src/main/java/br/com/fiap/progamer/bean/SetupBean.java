@@ -20,8 +20,6 @@ public class SetupBean {
 
 	private Setup setup = new Setup();
 	
-	private Setup setup = new Setup();
-	
 	@Inject
 	private SetupDao dao;
 	
@@ -35,14 +33,35 @@ public class SetupBean {
 		
 		dao.create(setup);
 		
-		FacesMessage facesMessage = new FacesMessage("Setup cadastrado com sucesso");
-		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
+		showMessage("Setup cadastrado com sucesso");
 		
-		return "setups";
+		return "setups?faces-redirect=true";
 	}
 	
 	public List<Setup> list() {
 		return dao.listAll();
+	}
+	
+	public String remove(Setup setup) {
+		dao.delete(setup);
+		showMessage("Setup apagado com sucesso");
+		return "setups?faces-redirect=true";
+	}
+	
+	public void edit() {
+		dao.update(setup);
+		showMessage("Setup atualizado com sucesso");
+	}
+
+	private void showMessage(String msg) {
+		FacesContext
+			.getCurrentInstance()
+			.getExternalContext()
+			.getFlash()
+			.setKeepMessages(true);
+		
+		FacesMessage facesMessage = new FacesMessage(msg);
+		FacesContext.getCurrentInstance().addMessage(null, facesMessage);
 	}
 
 	public Setup getSetup() {

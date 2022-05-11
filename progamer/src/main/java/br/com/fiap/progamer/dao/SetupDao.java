@@ -27,4 +27,21 @@ public class SetupDao {
 		return query.getResultList();
 	}
 
+	public void delete(Setup setup) {
+		manager.getTransaction().begin();
+		manager.remove(setup);		
+		manager.getTransaction().commit();
+	}
+
+	public void update(Setup setup) {
+		manager.getTransaction().begin();
+		
+		System.out.println(setup);
+		
+		manager.merge(setup);
+		
+		manager.getTransaction().commit();
+		
+	}
+
 }

@@ -10,7 +10,9 @@
 
 		<h:form>
 			<div class="card" style="margin: 1em">
-				<p:dataTable var="setup" value="#{setupBean.list()}">
+				<p:dataTable var="setup" value="#{setupBean.list()}" editable="true">
+				
+				 <p:ajax event="rowEdit" listener="#{setupBean.edit()}" update="msg"/>
 				
 					<p:column>
 						<img src="#{request.contextPath}#{setup.imagePath}" class="thumb"/>
@@ -21,12 +23,37 @@
 					</p:column>
 
 					<p:column headerText="Name">
-						<h:outputText value="#{setup.name}" />
+						<p:cellEditor>
+							<f:facet name="output">
+								<h:outputText value="#{setup.name}" />
+							</f:facet>
+							
+							<f:facet name="input">
+								<p:inputText value="#{setup.name}" />
+							</f:facet>
+						</p:cellEditor>
 					</p:column>
 
 					<p:column headerText="Price">
 						<h:outputText value="#{setup.price}" />
 					</p:column>
+					
+					<p:column>
+						  <p:commandButton 
+						  	action="#{setupBean.remove(setup)}" 
+						  	title="Delete setup" 
+						  	icon="pi pi-trash" 
+						  	styleClass="rounded-button ui-button-danger" 
+						  />
+					</p:column>
+					
+					<p:column>
+		                <p:rowEditor 
+		                	editTitle="Edit Row" 
+		                	cancelTitle="Cancel Edit" 
+		                	saveTitle="Save Row"
+		                />
+		            </p:column>
 
 				</p:dataTable>
 			</div>
