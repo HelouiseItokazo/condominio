@@ -1,4 +1,4 @@
-package br.com.fiap.progamer.util;
+package br.com.fiap.condominio.util;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
@@ -11,7 +11,7 @@ public class ManagerProducer {
 	@RequestScoped
 	@Produces
 	public EntityManager getManager() {
-		EntityManagerFactory factory = Persistence.createEntityManagerFactory("progamer-persistence-unit");
+		EntityManagerFactory factory = Persistence.createEntityManagerFactory("condominio-persistence-unit");
 		EntityManager manager = factory.createEntityManager();
 		return manager;
 	}

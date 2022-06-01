@@ -1,4 +1,4 @@
-package br.com.fiap.progamer.service;
+package br.com.fiap.condominio.service;
 
 import java.io.File;
 import java.io.FileOutputStream;
