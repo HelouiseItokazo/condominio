@@ -16,17 +16,23 @@
 					<div class="p-field">
 						<label for="name">Nome: </label>
 						<p:inputText id="nome" type="text"
-							value="#{visitanteBean.visitante.nome}">
+							value="#{visitanteBean.visitante.nome}" required="true"
+							validatorMessage="Insira apenas letras">
+							<f:validateRegex pattern="[a-zA-ZÀ-ú\\s\\' ]+" />
+							<f:ajax event="blur" render="messages" />
 
 						</p:inputText>
 					</div>
 
 					<div class="p-field">
 						<label for="name">CPF: </label>
-						<p:inputText id="cpf" type="text"
-							value="#{visitanteBean.visitante.cpf}">
+						<p:inputMask id="cpf" value="#{visitanteBean.visitante.cpf}"
+							mask="999.999.999-99" validateMask="true" required="true"
+							validatorMessage="CPF Inválido">
 
-						</p:inputText>
+							<f:validator validatorId="cpfValidator" />
+							<f:ajax event="blur" render="messages" />
+						</p:inputMask>
 					</div>
 
 					<div class="p-field">
@@ -46,12 +52,15 @@
 					</div>
 
 				</div>
-				<div class="p-field">
-					<label for="dataNascimento">Data de Nascimento: </label>
-					<p:datePicker value="#{visitanteBean.visitante.dataNascimento}"
-						id="dataNascimento" yearNavigator="true" />
 
-				</div>
+				<p:outputLabel for="dataNascimento" value="Data de Nascimento: " />
+				<p:calendar id="dataNascimento" pattern="dd/MM/yyyy"
+					value="#{visitanteBean.visitante.dataNascimento}" mask="99/99/9999"
+					required="true" converter="localDateConverter"
+					validatorMessage="A data deve ser anterior a data atual"
+					showOn="false">
+					<f:validator validatorId="dataNascimentoValidator" />
+				</p:calendar>
 
 
 				<div class="p-field">
@@ -59,7 +68,7 @@
 					<p:fileUpload value="#{visitanteBean.image}" mode="simple"
 						skinSimple="true" id="image" />
 				</div>
-				
+
 				<f:facet name="footer">
 					<p:commandButton icon="pi pi-check" value="Save"
 						action="#{visitanteBean.save}" />
